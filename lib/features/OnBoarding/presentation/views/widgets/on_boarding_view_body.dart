@@ -1,68 +1,63 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fruits_ecommerce/core/utils/app_images.dart';
+import 'package:fruits_ecommerce/core/widgets/custom_button.dart';
 
-class OnBoardingViewBody extends StatelessWidget {
+import 'package:fruits_ecommerce/features/OnBoarding/presentation/views/widgets/on_boarding_page_view.dart';
+
+class OnBoardingViewBody extends StatefulWidget {
   const OnBoardingViewBody({super.key});
+
+  @override
+  State<OnBoardingViewBody> createState() => _OnBoardingViewBodyState();
+}
+
+class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
+  late PageController pageController;
+  var currentIndex = 0;
+  @override
+  void initState() {
+    pageController = PageController();
+
+    pageController.addListener(() {
+      setState(() {
+        currentIndex = pageController.page!.round();
+      });
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          width: double.infinity,
-          height: MediaQuery.sizeOf(context).height * 0.5,
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: SvgPicture.asset(
-                  Assets.imagesBackground1,
-                  fit: BoxFit.fill,
-                ),
-              ),
-
-              Positioned(
-                bottom: 0.0,
-                left: 0.0,
-                right: 0.0,
-                child: Center(child: SvgPicture.asset(Assets.imagesFruit1)),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: const Text(
-                  "تحط",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
-                    color: Color(0xffffffff),
-                  ),
-                ),
-              ),
-            ],
+        Expanded(child: OnBoardingPageView(controller: pageController,)),
+        DotsIndicator(
+          dotsCount: 2,
+          decorator: DotsDecorator(
+            activeColor: Color(0xff1B5E37),
+            color: currentIndex == 1
+                ? const Color(0xff1B5E37)
+                : const Color(0xff1B5E37).withOpacity(0.5),
           ),
         ),
-        const SizedBox(height: 64.0),
-        const Text(
-          "FruitHUB مرحبًا بك في",
-          style: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
-            color: Color(0xff000000),
+        const SizedBox(height: 32.0),
+        Visibility(
+          maintainSize: true,
+          maintainAnimation: true,
+          maintainState: true,
+          visible: currentIndex == 1 ? true : false,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: const CustomButton(),
           ),
         ),
-
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32.0),
-          child: const Text(
-            textAlign: TextAlign.center,
-            "اكتشف تجربة تسوق فريدة مع FruitHUB. استكشف مجموعتنا الواسعة من الفواكه الطازجة الممتازة واحصل على أفضل العروض والجودة العالية.",
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              color: Color(0xff4E5556),
-              fontSize: 13.0,
-            ),
-          ),
-        ),
+        const SizedBox(height: 50.0),
       ],
     );
   }

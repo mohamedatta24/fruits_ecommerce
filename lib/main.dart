@@ -12,6 +12,10 @@ class FruitsEcommerce extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        scaffoldBackgroundColor: Color(0xffffffff),
+        fontFamily: "Cairo",
+      ),
       debugShowCheckedModeBanner: false,
       home: const OnBoardingView(),
     );
