@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fruits_ecommerce/constants.dart';
+import 'package:fruits_ecommerce/core/services/shared_prefs.dart';
 import 'package:fruits_ecommerce/core/utils/app_images.dart';
+import 'package:fruits_ecommerce/features/OnBoarding/presentation/views/on_boarding_view.dart';
+import 'package:fruits_ecommerce/features/auth/presentation/views/login_view.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -12,7 +16,7 @@ class SplashViewBody extends StatefulWidget {
 class _SplashViewBodyState extends State<SplashViewBody> {
   @override
   void initState() {
-    toNavigation();
+    toNavigation(context);
     super.initState();
   }
 
@@ -29,5 +33,29 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     );
   }
 
-  void toNavigation() {}
+  void toNavigation(context) {
+    bool isOnBoardingViewSeen = SharedPrefs.getBool(kIsOnBoardingViewSeen);
+
+    Future.delayed(const Duration(milliseconds: 3000), () {
+      if (isOnBoardingViewSeen) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return const LoginView();
+            },
+          ),
+        );
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return const OnBoardingView();
+            },
+          ),
+        );
+      }
+    });
+  }
 }

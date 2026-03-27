@@ -32,14 +32,19 @@ class OnBoardingItem extends StatelessWidget {
               ),
               Visibility(
                 visible: onBoardingModel.visible,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: const Text(
-                    "تحط",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18.0,
-                      color: Color(0xffffffff),
+                child: GestureDetector(
+                  onTap: () {
+                    
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: const Text(
+                      "تحط",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18.0,
+                        color: Color(0xffffffff),
+                      ),
                     ),
                   ),
                 ),

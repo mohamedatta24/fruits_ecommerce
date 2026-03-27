@@ -1,8 +1,11 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:fruits_ecommerce/constants.dart';
+import 'package:fruits_ecommerce/core/services/shared_prefs.dart';
 import 'package:fruits_ecommerce/core/widgets/custom_button.dart';
 
 import 'package:fruits_ecommerce/features/OnBoarding/presentation/views/widgets/on_boarding_page_view.dart';
+import 'package:fruits_ecommerce/features/auth/presentation/views/login_view.dart';
 
 class OnBoardingViewBody extends StatefulWidget {
   const OnBoardingViewBody({super.key});
@@ -36,7 +39,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(child: OnBoardingPageView(controller: pageController,)),
+        Expanded(child: OnBoardingPageView(controller: pageController)),
         DotsIndicator(
           dotsCount: 2,
           decorator: DotsDecorator(
@@ -54,7 +57,20 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
           visible: currentIndex == 1 ? true : false,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: const CustomButton(),
+            child: CustomButton(
+              text: "ابدأ الان",
+              onTap: () {
+                SharedPrefs.setBool(kIsOnBoardingViewSeen, true);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const LoginView();
+                    },
+                  ),
+                );
+              },
+            ),
           ),
         ),
         const SizedBox(height: 50.0),

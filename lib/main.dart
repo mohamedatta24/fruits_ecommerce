@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_ecommerce/core/services/shared_prefs.dart';
 import 'package:fruits_ecommerce/features/OnBoarding/presentation/views/on_boarding_view.dart';
 import 'package:fruits_ecommerce/features/splash/presentation/views/splash_view.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefs.init();
   runApp(const FruitsEcommerce());
 }
 
@@ -17,7 +20,7 @@ class FruitsEcommerce extends StatelessWidget {
         fontFamily: "Cairo",
       ),
       debugShowCheckedModeBanner: false,
-      home: const OnBoardingView(),
+      home: const SplashView(),
     );
   }
 }
