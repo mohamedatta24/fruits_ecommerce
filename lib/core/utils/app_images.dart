@@ -17,5 +17,11 @@ class Assets {
   static const String imagesLogo = "assets/images/logo.svg";
 
   static const String imagesPlant = "assets/images/plant.svg";
+
+  static const String imagesSocialIconsApple = "assets/images/social_icons_apple.svg";
+
+  static const String imagesSocialIconsFacebook = "assets/images/social_icons_facebook.svg";
+
+  static const String imagesSocialIconsGoogle = "assets/images/social_icons_google.svg";
 }
 
