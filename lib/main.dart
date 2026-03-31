@@ -15,7 +15,9 @@ class FruitsEcommerce extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        scaffoldBackgroundColor: Color(0xffffffff),
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: const Color(0xff1B5E37),
+        ),
         fontFamily: "Cairo",
       ),
       debugShowCheckedModeBanner: false,
