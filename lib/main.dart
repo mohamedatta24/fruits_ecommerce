@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fruits_ecommerce/core/services/shared_prefs.dart';
 import 'package:fruits_ecommerce/features/splash/presentation/views/splash_view.dart';
+import 'package:fruits_ecommerce/generated/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +23,14 @@ class FruitsEcommerce extends StatelessWidget {
         fontFamily: "Cairo",
       ),
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      locale: const Locale("ar"),
       home: const SplashView(),
     );
   }
