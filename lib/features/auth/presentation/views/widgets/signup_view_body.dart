@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_ecommerce/constants.dart';
 import 'package:fruits_ecommerce/core/widgets/custom_button.dart';
 import 'package:fruits_ecommerce/features/auth/presentation/views/widgets/already_have_an_account.dart';
 import 'package:fruits_ecommerce/features/auth/presentation/views/widgets/custom_text_form_field.dart';
@@ -11,7 +12,7 @@ class SignupViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
       child: Column(
         children: [
           const SizedBox(height: 24.0),
@@ -27,9 +28,7 @@ class SignupViewBody extends StatelessWidget {
           const SizedBox(height: 16.0),
           const PasswordField(),
           const SizedBox(height: 16.0),
-          TermsAndConditionsWidget(
-            onChanged: (value) {},
-          ),
+          TermsAndConditionsWidget(onChanged: (value) {}),
           const SizedBox(height: 32.0),
           CustomButton(text: "إنشاء حساب", onTap: () {}),
           const SizedBox(height: 16.0),

@@ -56,7 +56,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
           maintainState: true,
           visible: currentIndex == 1 ? true : false,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
             child: CustomButton(
               text: "ابدأ الان",
               onTap: () {

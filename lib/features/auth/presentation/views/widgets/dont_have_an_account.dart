@@ -10,6 +10,14 @@ class DontHaveAnAccount extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        const Text(
+          "لا تمتلك حساب؟ ",
+          style: TextStyle(
+            color: Color(0xff949D9E),
+            fontSize: 16.0,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         GestureDetector(
           onTap: () {
             Navigator.push(
@@ -28,15 +36,6 @@ class DontHaveAnAccount extends StatelessWidget {
               fontSize: 16.0,
               fontWeight: FontWeight.w600,
             ),
-          ),
-        ),
-        const SizedBox(width: 4.0),
-        const Text(
-          "لا تمتلك حساب؟",
-          style: TextStyle(
-            color: Color(0xff949D9E),
-            fontSize: 16.0,
-            fontWeight: FontWeight.w600,
           ),
         ),
       ],
