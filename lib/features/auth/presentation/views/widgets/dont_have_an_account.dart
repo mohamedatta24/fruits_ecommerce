@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_ecommerce/features/auth/presentation/views/signup_view.dart';
 
 class DontHaveAnAccount extends StatelessWidget {
   const DontHaveAnAccount({super.key, this.onTap});
@@ -10,7 +11,16 @@ class DontHaveAnAccount extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         GestureDetector(
-          onTap: onTap,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return const SignupView();
+                },
+              ),
+            );
+          },
           child: const Text(
             "قم بإنشاء حساب",
             style: TextStyle(

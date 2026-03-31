@@ -6,6 +6,8 @@ class Assets {
 
   static const String imagesBackground2 = "assets/images/background_2.svg";
 
+  static const String imagesCheck = "assets/images/check.svg";
+
   static const String imagesCircles = "assets/images/circles.svg";
 
   static const String imagesFruit1 = "assets/images/fruit_1.svg";
