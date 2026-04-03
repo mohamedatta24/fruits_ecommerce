@@ -5,12 +5,13 @@ import 'package:fruits_ecommerce/core/widgets/custom_button.dart';
 import 'package:fruits_ecommerce/features/auth/presentation/views/widgets/custom_text_form_field.dart';
 import 'package:fruits_ecommerce/features/auth/presentation/views/widgets/dont_have_an_account.dart';
 import 'package:fruits_ecommerce/features/auth/presentation/views/widgets/forgot_your_password.dart';
-import 'package:fruits_ecommerce/features/auth/presentation/views/widgets/password_field.dart';
+import 'package:fruits_ecommerce/features/auth/presentation/views/widgets/custom_password_field.dart';
 import 'package:fruits_ecommerce/features/auth/presentation/views/widgets/social_button.dart';
 
 class LoginViewBody extends StatelessWidget {
   const LoginViewBody({super.key});
 
+  @override
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,7 +26,7 @@ class LoginViewBody extends StatelessWidget {
               suffixIcon: Icon(Icons.email, color: Color(0xffC9CECF)),
             ),
             const SizedBox(height: 16.0),
-            const PasswordField(),
+            const CustomPasswordField(),
             const SizedBox(height: 16.0),
             ForgotYourPassword(onTap: () {}),
             const SizedBox(height: 32.0),

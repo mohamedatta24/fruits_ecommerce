@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fruits_ecommerce/core/errors/custom_exception.dart';
 
@@ -12,6 +14,7 @@ class FirebaseAuthService {
 
       return credential.user!;
     } on FirebaseAuthException catch (e) {
+    log('FirebaseAuthException: ${e.code} - ${e.message}');
       if (e.code == 'weak-password') {
         throw CustomException('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {

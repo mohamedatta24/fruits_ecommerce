@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:fruits_ecommerce/features/auth/presentation/views/widgets/custom_text_form_field.dart';
 
 // ignore: must_be_immutable
-class PasswordField extends StatefulWidget {
-  const PasswordField({super.key, this.controller});
+class CustomPasswordField extends StatefulWidget {
+  const CustomPasswordField({super.key, this.controller});
 
   final TextEditingController? controller;
 
   @override
-  State<PasswordField> createState() => _PasswordFieldState();
+  State<CustomPasswordField> createState() => _CustomPasswordFieldState();
 }
 
-class _PasswordFieldState extends State<PasswordField> {
+class _CustomPasswordFieldState extends State<CustomPasswordField> {
   bool obscureText = false;
 
   @override

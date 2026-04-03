@@ -3,12 +3,12 @@ import 'package:fruits_ecommerce/core/errors/failure.dart';
 import 'package:fruits_ecommerce/core/services/firebase_auth_service.dart';
 import 'package:fruits_ecommerce/features/auth/data/models/user_model.dart';
 import 'package:fruits_ecommerce/features/auth/domain/entities/user_entity.dart';
-import 'package:fruits_ecommerce/features/auth/domain/repositories/auth_repos.dart';
+import 'package:fruits_ecommerce/features/auth/domain/repositories/auth_repo.dart';
 
-class AuthReposImpel implements AuthRepos {
+class AuthRepoImpel implements AuthRepo {
   final FirebaseAuthService firebaseAuthService;
 
-  AuthReposImpel({required this.firebaseAuthService});
+  AuthRepoImpel({required this.firebaseAuthService});
 
   @override
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword({

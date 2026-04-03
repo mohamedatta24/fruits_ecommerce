@@ -7,7 +7,11 @@ class SignupInitial extends SignupState {}
 
 class SignupLoading extends SignupState {}
 
-class SignupSuccess extends SignupState {}
+class SignupSuccess extends SignupState {
+  final UserEntity user;
+
+  SignupSuccess(this.user);
+}
 
 class SignupFailure extends SignupState {
   final String errorMessage;
