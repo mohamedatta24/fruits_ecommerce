@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:fruits_ecommerce/core/services/custom_bloc_observer.dart';
 import 'package:fruits_ecommerce/core/services/dependency_injection.dart';
 import 'package:fruits_ecommerce/core/services/shared_prefs.dart';
 import 'package:fruits_ecommerce/features/splash/presentation/views/splash_view.dart';
@@ -12,6 +14,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await SharedPrefs.init();
   setupGetIt();
+  Bloc.observer = CustomBlocObserver();
   runApp(const FruitsEcommerce());
 }
 

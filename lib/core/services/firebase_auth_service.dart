@@ -14,16 +14,18 @@ class FirebaseAuthService {
 
       return credential.user!;
     } on FirebaseAuthException catch (e) {
-    log('FirebaseAuthException: ${e.code} - ${e.message}');
+      log('FirebaseAuthException: ${e.code} - ${e.message}');
       if (e.code == 'weak-password') {
-        throw CustomException('The password provided is too weak.');
+        throw CustomException('كلمة المرور ضعيفة جدا.');
       } else if (e.code == 'email-already-in-use') {
-        throw CustomException('The account already exists for that email.');
+        throw CustomException('لحساب موجود بالفعل لهذا البريد الإلكتروني.');
+      } else if (e.code == "network-request-failed") {
+        throw CustomException("تاكد من اتصالك بالإنترنت وحاول مرة أخرى.");
       } else {
-        throw CustomException('An unexpected error occurred');
+        throw CustomException('حدث خطأ غير متوقع');
       }
     } catch (e) {
-      throw CustomException('An unexpected error occurred');
+      throw CustomException('حدث خطأ غير متوقع');
     }
   }
 }

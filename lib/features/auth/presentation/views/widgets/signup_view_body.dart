@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_ecommerce/constants.dart';
 import 'package:fruits_ecommerce/core/widgets/custom_button.dart';
+import 'package:fruits_ecommerce/core/widgets/custom_snack_bar_message.dart';
 import 'package:fruits_ecommerce/features/auth/presentation/cubits/signup/signup_cubit.dart';
 import 'package:fruits_ecommerce/features/auth/presentation/views/widgets/already_have_an_account.dart';
 import 'package:fruits_ecommerce/features/auth/presentation/views/widgets/custom_text_form_field.dart';
@@ -23,7 +26,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
-  bool isTermsAccepted = false;
+  late bool isTermsAccepted = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -51,30 +54,30 @@ class _SignupViewBodyState extends State<SignupViewBody> {
             TermsAndConditionsWidget(
               onChanged: (value) {
                 isTermsAccepted = value;
-                setState(() {});
               },
             ),
             const SizedBox(height: 32.0),
             CustomButton(
               text: "إنشاء حساب",
               onTap: () {
-                if (isTermsAccepted) {
-                  if (formKey.currentState!.validate()) {
+                if (formKey.currentState!.validate()) {
+                  if (isTermsAccepted) {
                     context.read<SignupCubit>().signup(
                       name: nameController.text,
                       email: emailController.text,
                       password: passwordController.text,
                     );
                   } else {
-                    autovalidateMode = AutovalidateMode.always;
-                    setState(() {});
+                    buildSnackBarMessage(
+                      context,
+                      "يجب عليك الموافقة على الشروط والأحكام ",
+                      backgroundColor: Colors.red,
+                    );
                   }
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("يرجى قبول الشروط والأحكام للمتابعة"),
-                    ),
-                  );
+                  setState(() {
+                    autovalidateMode = AutovalidateMode.always;
+                  });
                 }
               },
             ),
