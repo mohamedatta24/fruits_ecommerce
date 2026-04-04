@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Fruits Ecommerce</string>
+    <string name="facebook_app_id">973566868437747</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">46c5af3261a85315b5921cbae499b35d</string>
+</resources>
