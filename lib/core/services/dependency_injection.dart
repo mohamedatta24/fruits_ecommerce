@@ -1,3 +1,5 @@
+import 'package:fruits_ecommerce/core/services/database_service.dart';
+import 'package:fruits_ecommerce/core/services/fire_store_service.dart';
 import 'package:fruits_ecommerce/core/services/firebase_auth_service.dart';
 import 'package:fruits_ecommerce/features/auth/data/repositories/auth_repo_impel.dart';
 import 'package:fruits_ecommerce/features/auth/domain/repositories/auth_repo.dart';
@@ -8,9 +10,13 @@ import 'package:get_it/get_it.dart';
 final getIt = GetIt.instance;
 void setupGetIt() {
   getIt.registerSingleton<FirebaseAuthService>(FirebaseAuthService());
+  getIt.registerSingleton<DatabaseService>(FireStoreService());
 
   getIt.registerSingleton<AuthRepoImpel>(
-    AuthRepoImpel(firebaseAuthService: getIt<FirebaseAuthService>()),
+    AuthRepoImpel(
+      firebaseAuthService: getIt<FirebaseAuthService>(),
+      databaseService: getIt<DatabaseService>(),
+    ),
   );
   getIt.registerSingleton<AuthRepo>(getIt<AuthRepoImpel>());
 

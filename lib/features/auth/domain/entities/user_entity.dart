@@ -4,4 +4,8 @@ class UserEntity {
   final String email;
 
   UserEntity({required this.id, required this.name, required this.email});
+
+  Map<String, dynamic> toMap() {
+    return {'id': id, 'name': name, 'email': email};
+  }
 }

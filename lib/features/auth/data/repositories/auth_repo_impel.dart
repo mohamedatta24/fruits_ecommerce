@@ -1,15 +1,21 @@
 import 'package:dartz/dartz.dart';
 import 'package:fruits_ecommerce/core/errors/custom_exception.dart';
 import 'package:fruits_ecommerce/core/errors/failure.dart';
+import 'package:fruits_ecommerce/core/services/database_service.dart';
 import 'package:fruits_ecommerce/core/services/firebase_auth_service.dart';
+import 'package:fruits_ecommerce/core/utils/backend_endpoints.dart';
 import 'package:fruits_ecommerce/features/auth/data/models/user_model.dart';
 import 'package:fruits_ecommerce/features/auth/domain/entities/user_entity.dart';
 import 'package:fruits_ecommerce/features/auth/domain/repositories/auth_repo.dart';
 
 class AuthRepoImpel implements AuthRepo {
   final FirebaseAuthService firebaseAuthService;
+  final DatabaseService databaseService;
 
-  AuthRepoImpel({required this.firebaseAuthService});
+  AuthRepoImpel({
+    required this.firebaseAuthService,
+    required this.databaseService,
+  });
 
   // createUserWithEmailAndPassword-----------------------------------------------------------
   @override
@@ -23,7 +29,9 @@ class AuthRepoImpel implements AuthRepo {
         email,
         password,
       );
-      return Right(UserModel.fromFirebaseUser(user));
+      var userModel = UserEntity(id: user.uid, name: name, email: email);
+      await addUserData(user: userModel);
+      return Right(userModel);
     } on CustomException catch (e) {
       return Left(ServerFailure(e.message.toString()));
     } catch (e) {
@@ -74,5 +82,14 @@ class AuthRepoImpel implements AuthRepo {
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
+  }
+
+  // addUserData-----------------------------------------------------------
+  @override
+  Future<void> addUserData({required UserEntity user}) async {
+    await databaseService.addData(
+      path: BackendEndpoints.users,
+      data: user.toMap(),
+    );
   }
 }
