@@ -3,11 +3,31 @@ import 'package:fruits_ecommerce/core/services/database_service.dart';
 
 class FireStoreService implements DatabaseService {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  // addData-------------------------------------------------------------
   @override
   Future<void> addData({
     required String path,
     required Map<String, dynamic> data,
+    String? documentId,
   }) async {
-    await firestore.collection(path).add(data);
+    if (documentId != null) {
+      await firestore
+          .collection(path)
+          .doc(documentId)
+          .set(data, SetOptions(merge: true));
+    } else {
+      await firestore.collection(path).add(data);
+    }
+  }
+
+  // getData-------------------------------------------------------------
+  @override
+  Future<Map<String, dynamic>> getData({
+    required String path,
+    required String documentId,
+  }) async {
+    var doc = await firestore.collection(path).doc(documentId).get();
+    return doc.data() as Map<String, dynamic>;
   }
 }

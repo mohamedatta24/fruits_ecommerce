@@ -5,6 +5,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fruits_ecommerce/core/errors/custom_exception.dart';
 
 class FirebaseAuthService {
+  // Delete user account-------------------------------------------------------------
+  Future<void> deleteUser() async {
+    return FirebaseAuth.instance.currentUser!.delete();
+  }
+
   // createUserWithEmailAndPassword------------------------------------------------------------
   Future<User> createUserWithEmailAndPassword(
     String email,

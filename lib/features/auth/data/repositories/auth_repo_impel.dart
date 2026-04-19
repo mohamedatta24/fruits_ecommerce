@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fruits_ecommerce/core/errors/custom_exception.dart';
 import 'package:fruits_ecommerce/core/errors/failure.dart';
 import 'package:fruits_ecommerce/core/services/database_service.dart';
@@ -24,17 +25,20 @@ class AuthRepoImpel implements AuthRepo {
     required String email,
     required String password,
   }) async {
+    User? user;
     try {
-      final user = await firebaseAuthService.createUserWithEmailAndPassword(
+      user = await firebaseAuthService.createUserWithEmailAndPassword(
         email,
         password,
       );
-      var userModel = UserEntity(id: user.uid, name: name, email: email);
-      await addUserData(user: userModel);
-      return Right(userModel);
+      var userEntity = UserEntity(uid: user.uid, name: name, email: email);
+      await addUserData(user: userEntity);
+      return Right(userEntity);
     } on CustomException catch (e) {
+      await deleteUser(user);
       return Left(ServerFailure(e.message.toString()));
     } catch (e) {
+      await deleteUser(user);
       return Left(ServerFailure(e.toString()));
     }
   }
@@ -50,7 +54,8 @@ class AuthRepoImpel implements AuthRepo {
         email,
         password,
       );
-      return Right(UserModel.fromFirebaseUser(user));
+      var userEntity = await getUserData(uid: user.uid);
+      return Right(userEntity);
     } on CustomException catch (e) {
       return Left(ServerFailure(e.message.toString()));
     } catch (e) {
@@ -61,12 +66,17 @@ class AuthRepoImpel implements AuthRepo {
   // signInWithGoogle-----------------------------------------------------------
   @override
   Future<Either<Failure, UserEntity>> signInWithGoogle() async {
+    User? user;
     try {
-      final user = await firebaseAuthService.signInWithGoogle();
-      return Right(UserModel.fromFirebaseUser(user));
+      user = await firebaseAuthService.signInWithGoogle();
+      var userEntity = UserModel.fromFirebaseUser(user);
+      await addUserData(user: userEntity);
+      return Right(userEntity);
     } on CustomException catch (e) {
+      await deleteUser(user);
       return Left(ServerFailure(e.message.toString()));
     } catch (e) {
+      await deleteUser(user);
       return Left(ServerFailure(e.toString()));
     }
   }
@@ -74,12 +84,17 @@ class AuthRepoImpel implements AuthRepo {
   // signInWithFacebook-----------------------------------------------------------
   @override
   Future<Either<Failure, UserEntity>> signInWithFacebook() async {
+    User? user;
     try {
-      final user = await firebaseAuthService.signInWithFacebook();
-      return Right(UserModel.fromFirebaseUser(user));
+      user = await firebaseAuthService.signInWithFacebook();
+      var userEntity = UserModel.fromFirebaseUser(user);
+      await addUserData(user: userEntity);
+      return Right(userEntity);
     } on CustomException catch (e) {
+      await deleteUser(user);
       return Left(ServerFailure(e.message.toString()));
     } catch (e) {
+      await deleteUser(user);
       return Left(ServerFailure(e.toString()));
     }
   }
@@ -88,8 +103,28 @@ class AuthRepoImpel implements AuthRepo {
   @override
   Future<void> addUserData({required UserEntity user}) async {
     await databaseService.addData(
-      path: BackendEndpoints.users,
+      path: BackendEndpoints.addUserData,
       data: user.toMap(),
+      documentId: user.uid,
     );
+  }
+
+  // deleteUser-----------------------------------------------------------
+  @override
+  Future<void> deleteUser(User? user) async {
+    if (user != null) {
+      await firebaseAuthService.deleteUser();
+    }
+  }
+
+  // getUserData-----------------------------------------------------------
+  @override
+  Future<UserEntity> getUserData({required String uid}) async {
+    var data = await databaseService.getData(
+      path: BackendEndpoints.getUserData,
+      documentId: uid,
+    );
+
+    return UserModel.fromJson(data);
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fruits_ecommerce/core/services/custom_bloc_observer.dart';
 import 'package:fruits_ecommerce/core/services/dependency_injection.dart';
 import 'package:fruits_ecommerce/core/services/shared_prefs.dart';
+import 'package:fruits_ecommerce/features/home/presentation/views/home_view.dart';
 import 'package:fruits_ecommerce/features/splash/presentation/views/splash_view.dart';
 import 'package:fruits_ecommerce/firebase_options.dart';
 import 'package:fruits_ecommerce/generated/l10n.dart';
@@ -39,7 +40,7 @@ class FruitsEcommerce extends StatelessWidget {
       ],
       supportedLocales: S.delegate.supportedLocales,
       locale: const Locale("ar"),
-      home: const SplashView(),
+      home: const HomeView(),
     );
   }
 }

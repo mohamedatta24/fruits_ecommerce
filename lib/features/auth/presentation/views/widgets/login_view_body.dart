@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_ecommerce/constants.dart';
@@ -73,12 +75,18 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 },
               ),
               const SizedBox(height: 16.0),
-              SocialButton(
-                title: "تسجيل بواسطة أبل",
-                image: Assets.imagesSocialIconsApple,
-                onTap: () {},
-              ),
-              const SizedBox(height: 16.0),
+              Platform.isIOS
+                  ? Column(
+                      children: [
+                        SocialButton(
+                          title: "تسجيل بواسطة أبل",
+                          image: Assets.imagesSocialIconsApple,
+                          onTap: () {},
+                        ),
+                        const SizedBox(height: 16.0),
+                      ],
+                    )
+                  : SizedBox(),
               SocialButton(
                 title: "تسجيل بواسطة فيسبوك",
                 image: Assets.imagesSocialIconsFacebook,
