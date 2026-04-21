@@ -10,6 +10,8 @@ class Assets {
 
   static const String imagesCircles = "assets/images/circles.svg";
 
+  static const String imagesEllipse = "assets/images/ellipse.svg";
+
   static const String imagesFilter = "assets/images/filter.svg";
 
   static const String imagesFruit1 = "assets/images/fruit_1.svg";
@@ -33,5 +35,7 @@ class Assets {
   static const String imagesUser = "assets/images/user.svg";
 
   static const String imagesUserPhoto = "assets/images/user_photo.png";
+
+  static const String imagesWatermelon = "assets/images/watermelon.png";
 }
 
