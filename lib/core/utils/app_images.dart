@@ -22,7 +22,7 @@ class Assets {
 
   static const String imagesPlant = "assets/images/plant.svg";
 
-  static const String imagesSearch = "assets/images/search.png";
+  static const String imagesSearch = "assets/images/search.svg";
 
   static const String imagesSocialIconsApple = "assets/images/social_icons_apple.svg";
 
