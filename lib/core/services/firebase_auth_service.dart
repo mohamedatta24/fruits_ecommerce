@@ -97,4 +97,8 @@ class FirebaseAuthService {
     );
     return userCredential.user!;
   }
+
+  bool isLoggedIn() {
+    return FirebaseAuth.instance.currentUser != null;
+  }
 }

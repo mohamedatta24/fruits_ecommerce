@@ -41,7 +41,7 @@ class FruitsEcommerce extends StatelessWidget {
       ],
       supportedLocales: S.delegate.supportedLocales,
       locale: const Locale("ar"),
-      home: const LoginView(),
+      home: const SplashView(),
     );
   }
 }

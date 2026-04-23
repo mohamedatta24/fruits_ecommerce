@@ -137,7 +137,7 @@ class AuthRepoImpel implements AuthRepo {
   }
 
   @override
-  Future<void> saveUserData({required UserEntity user}) async {
+  Future<void> saveUserData({required UserEntity user}) {
     var jsonData = jsonEncode(UserModel.fromEntity(user).toMap());
     var userEntity = SharedPrefs.setString(kUserData, jsonData);
     return userEntity;
