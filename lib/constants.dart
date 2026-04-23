@@ -1,2 +1,3 @@
-const String kIsOnBoardingViewSeen = "isOnBoardingViewSeen";
 const double kHorizontalPadding = 16.0;
+const String kIsOnBoardingViewSeen = "isOnBoardingViewSeen";
+const String kUserData = "KUserData";

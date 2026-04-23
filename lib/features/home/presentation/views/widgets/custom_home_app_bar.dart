@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fruits_ecommerce/core/utils/app_images.dart';
+import 'package:fruits_ecommerce/core/widgets/get_user_data.dart';
 
 class CustomHomeAppBar extends StatelessWidget {
   const CustomHomeAppBar({super.key});
@@ -14,7 +15,7 @@ class CustomHomeAppBar extends StatelessWidget {
         child: SvgPicture.asset(Assets.imagesNotification),
       ),
       title: Text(
-        "صباح الخير !..",
+        getUserData().email,
         style: TextStyle(
           fontSize: 16.0,
           fontWeight: FontWeight.w400,
@@ -22,14 +23,24 @@ class CustomHomeAppBar extends StatelessWidget {
         ),
       ),
       subtitle: Text(
-        "أحمد مصطفي",
+        getUserData().name,
         style: TextStyle(
           fontSize: 16.0,
           fontWeight: FontWeight.bold,
           color: Color(0xff0C0D0D),
         ),
       ),
-      leading: Image.asset(Assets.imagesUser, fit: BoxFit.fill),
+      leading: CircleAvatar(
+        radius: 25,
+        backgroundColor: Colors.red,
+        backgroundImage:
+            (getUserData().image != null && getUserData().image!.isNotEmpty)
+            ? NetworkImage(getUserData().image!)
+            : null,
+        child: (getUserData().image == null || getUserData().image!.isEmpty)
+            ? Icon(Icons.person)
+            : null,
+      ),
     );
   }
 }
